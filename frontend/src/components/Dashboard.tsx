@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { commandsApi, Command } from '../api/client';
+import { commandsApi } from '../api/client';
 import CommandSubmit from './CommandSubmit';
 import CommandHistory from './CommandHistory';
 import RulesManager from './RulesManager';
