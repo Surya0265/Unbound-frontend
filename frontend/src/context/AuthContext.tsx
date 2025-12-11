@@ -19,6 +19,10 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+// FIX: read API base
+const API_BASE = import.meta.env.VITE_API_BASE || 'https://unbound-backend-1.onrender.com/';
+const BASE = API_BASE.replace(/\/$/, '');
+
 export function AuthProvider({ children }: { children: ReactNode }) {
     const [user, setUser] = useState<User | null>(null);
     const [apiKey, setApiKey] = useState<string | null>(() => localStorage.getItem('apiKey'));
@@ -26,9 +30,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     const fetchUser = async (key: string): Promise<User | null> => {
         try {
-            const response = await fetch('/api/users/me', {
+            const response = await fetch(`${BASE}/api/users/me`, {
                 headers: { 'X-API-Key': key },
             });
+
             if (response.ok) {
                 return await response.json();
             }
@@ -40,6 +45,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     const login = async (key: string): Promise<boolean> => {
         setIsLoading(true);
+
         const userData = await fetchUser(key);
         if (userData) {
             setUser(userData);
@@ -48,6 +54,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             setIsLoading(false);
             return true;
         }
+
         setIsLoading(false);
         return false;
     };

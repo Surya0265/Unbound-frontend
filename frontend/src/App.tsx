@@ -6,6 +6,8 @@ import Dashboard from './components/Dashboard';
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
     const { user, isLoading } = useAuth();
 
+    console.log("API BASE:", import.meta.env.VITE_API_BASE);
+
     if (isLoading) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-terminal-bg">
@@ -33,6 +35,7 @@ function AppRoutes() {
                 path="/login"
                 element={user ? <Navigate to="/" replace /> : <Login />}
             />
+
             <Route
                 path="/*"
                 element={

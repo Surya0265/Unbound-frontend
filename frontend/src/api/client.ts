@@ -1,5 +1,7 @@
-const API_BASE = import.meta.env.VITE_API_BASE ? import.meta.env.VITE_API_BASE + 'api' : '/api';
-
+const API_BASE =
+    (import.meta.env.VITE_API_BASE || "https://unbound-backend-1.onrender.com/")
+        .replace(/\/$/, "") + "/api";
+console.log("API BASE (api.ts):", API_BASE);
 interface ApiOptions {
     method?: 'GET' | 'POST' | 'PUT' | 'DELETE';
     body?: unknown;
