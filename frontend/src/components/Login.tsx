@@ -101,7 +101,7 @@ export default function Login() {
 
                 {/* Footer */}
                 <div className="mt-6 text-center text-xs text-terminal-dim">
-                    <p>API key stored locally. Transmitted with each request.</p>
+                    <p>API key stored in request headers. Transmitted with each request.</p>
                 </div>
             </div>
         </div>
